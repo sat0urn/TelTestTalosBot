@@ -45,7 +45,7 @@ public class AnimeService {
     private static JSONArray getObjects(String message) throws IOException {
         message = URLEncoder.encode(message, StandardCharsets.UTF_8);
 
-        String url_str = "https://api.anilibria.tv/v3/title/search?search="
+        String url_str = "http://api.anilibria.tv/v3/title/search?search="
                 + message
                 + "&filter=id,names.ru,description,player.episodes&limit=3";
         URL url = new URL(url_str);
