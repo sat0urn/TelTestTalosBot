@@ -31,10 +31,14 @@ public class AnimeService {
             int id = animeJson.getInt("id");
             String name_ru = animeJson.getJSONObject("names").optString("ru");
             String description = animeJson.optString("description");
+            String posterUrl = animeJson.getJSONObject("posters")
+                    .getJSONObject("original")
+                    .getString("url");
 
             anime.setId(id);
             anime.setNameRu(name_ru);
             anime.setDescription(description);
+            anime.setPosterUrl(posterUrl);
 
             anime_list.add(anime);
         }
@@ -45,9 +49,9 @@ public class AnimeService {
     private static JSONArray getObjects(String message) throws IOException {
         message = URLEncoder.encode(message, StandardCharsets.UTF_8);
 
-        String url_str = "http://api.anilibria.tv/v3/title/search?search="
+        String url_str = System.getenv("ANI_API_URL")
                 + message
-                + "&filter=id,names.ru,description,player.episodes&limit=3";
+                + "&filter=id,names.ru,description,posters.original,player.episodes&include=raw_poster&limit=3";
         URL url = new URL(url_str);
 
         Scanner scanner = new Scanner((InputStream) url.getContent());

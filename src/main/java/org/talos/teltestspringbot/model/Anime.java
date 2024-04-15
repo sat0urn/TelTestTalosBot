@@ -7,4 +7,5 @@ public class Anime {
     Integer id;
     String nameRu;
     String description;
+    String posterUrl;
 }

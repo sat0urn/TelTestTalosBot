@@ -140,13 +140,14 @@ public class TelBot implements SpringLongPollingBot, LongPollingSingleThreadUpda
                                     Описание: %s
                                     """, anime.getId(), anime.getNameRu(), anime.getDescription());
 
-                            SendMessage sendMessage = SendMessage
+                            SendPhoto sendPhoto = SendPhoto
                                     .builder()
                                     .chatId(chat_id)
-                                    .text(answer)
+                                    .photo(new InputFile("https://anilibria.tv" + anime.getPosterUrl()))
+                                    .caption(answer)
                                     .build();
 
-                            telegramClient.execute(sendMessage);
+                            telegramClient.execute(sendPhoto);
                         }
                     }
 
