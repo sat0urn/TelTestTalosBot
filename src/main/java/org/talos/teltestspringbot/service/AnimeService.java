@@ -62,7 +62,7 @@ public class AnimeService {
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();
         uc.setRequestMethod("GET");
         uc.setRequestProperty("User-Agent", "Mozilla/5.0");
-        uc.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+        uc.setRequestProperty("Accept-Language", "en-US,en,ru-RU,ru;q=0.5");
         uc.setRequestProperty("Accept", "text/html");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(), StandardCharsets.UTF_8));
