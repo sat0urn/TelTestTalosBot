@@ -5,10 +5,12 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.talos.teltestspringbot.model.Anime;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +54,25 @@ public class AnimeService {
         String url_str = System.getenv("ANI_API_URL")
                 + message
                 + "&filter=id,names.ru,description,posters.original,player.episodes&include=raw_poster&limit=3";
+
+        System.out.println("Gathering data from URL: " + url_str);
+
         URL url = new URL(url_str);
 
-        Scanner scanner = new Scanner((InputStream) url.getContent());
+        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+        uc.setRequestMethod("GET");
+        uc.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(), StandardCharsets.UTF_8));
 
         StringBuilder result = new StringBuilder();
-        while (scanner.hasNextLine()) result.append(scanner.nextLine());
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            result.append(inputLine);
+        }
+
+        in.close();
+        uc.disconnect();
 
         JSONObject object = new JSONObject(result.toString());
 
