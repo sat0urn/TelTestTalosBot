@@ -65,9 +65,6 @@ public class AnimeService {
         uc.setRequestMethod("GET");
         uc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 
-        // Set the request method
-        uc.setRequestMethod("GET");
-
         // Get the response code
         int responseCode = uc.getResponseCode();
         System.out.println("Response Code: " + responseCode);
