@@ -1,14 +1,12 @@
 package org.talos.teltestspringbot.bot;
 
 import com.vdurmont.emoji.EmojiParser;
-import org.checkerframework.checker.units.qual.A;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.talos.teltestspringbot.model.Anime;
 import org.talos.teltestspringbot.service.AnimeService;
 import org.talos.teltestspringbot.service.UserService;
-import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.BotSession;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.longpolling.starter.AfterBotRegistration;
@@ -41,17 +39,22 @@ import java.util.List;
 public class TelBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
     private final TelegramClient telegramClient;
+    private final String botToken;
     private final UserService userService;
     private boolean animeRequested;
 
-    public TelBot(UserService userService, AnimeService animeService) {
-        telegramClient = new OkHttpTelegramClient(getBotToken());
+    public TelBot(
+            TelegramClient telegramClient,
+            String botToken,
+            UserService userService) {
+        this.telegramClient = telegramClient;
+        this.botToken = botToken;
         this.userService = userService;
     }
 
     @Override
     public String getBotToken() {
-        return System.getenv("TG_TOKEN");
+        return botToken;
     }
 
     @Override
