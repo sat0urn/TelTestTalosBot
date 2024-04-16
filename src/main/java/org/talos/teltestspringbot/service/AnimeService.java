@@ -60,10 +60,12 @@ public class AnimeService {
         URL url = new URL(url_str);
 
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+        System.out.println("1");
         uc.setRequestMethod("GET");
-        uc.setRequestProperty("User-Agent", "Mozilla/5.0");
+        uc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
         uc.setRequestProperty("Accept-Language", "en-US,en,ru-RU,ru;q=0.5");
         uc.setRequestProperty("Accept", "text/html");
+        System.out.println("2");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(), StandardCharsets.UTF_8));
 
