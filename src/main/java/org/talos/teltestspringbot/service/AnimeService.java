@@ -52,7 +52,7 @@ public class AnimeService {
     private static JSONArray getObjects(String message) throws IOException {
         message = URLEncoder.encode(message, StandardCharsets.UTF_8);
 
-        String url_str = System.getenv("ANI_API_URL")
+        String url_str = "https://api.anilibria.tv/v3/title/search?search="
                 + message
                 + "&filter=id,names.ru,description,posters.original,player.episodes&include=raw_poster&limit=3";
 
