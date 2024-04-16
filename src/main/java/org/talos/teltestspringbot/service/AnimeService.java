@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 @Service
@@ -63,6 +64,22 @@ public class AnimeService {
         System.out.println("1");
         uc.setRequestMethod("GET");
         uc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+
+        // Set the request method
+        uc.setRequestMethod("GET");
+
+        // Get the response code
+        int responseCode = uc.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
+
+        // Log response headers
+        Map<String, List<String>> headers = uc.getHeaderFields();
+        for (Map.Entry<String, java.util.List<String>> entry : headers.entrySet()) {
+            String headerName = entry.getKey();
+            for (String value : entry.getValue()) {
+                System.out.println(headerName + ": " + value);
+            }
+        }
         System.out.println("2");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(), StandardCharsets.UTF_8));
