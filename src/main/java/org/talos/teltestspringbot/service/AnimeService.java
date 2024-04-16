@@ -62,8 +62,10 @@ public class AnimeService {
 
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();
         System.out.println("1");
-        uc.setRequestMethod("GET");
-        uc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+        uc.addRequestProperty("User-Agent", "Mozilla/4.0");
+        uc.setRequestProperty("Accept", "*/*");
+        uc.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+
 
         // Get the response code
         int responseCode = uc.getResponseCode();
