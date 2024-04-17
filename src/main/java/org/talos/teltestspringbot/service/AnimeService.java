@@ -66,8 +66,14 @@ public class AnimeService {
         uc.setRequestProperty("X-Requested-With", "XMLHttpRequest");
         uc.setRequestProperty("Accept", "*/*");
         uc.setRequestProperty("Connection", "keep-alive");
+        uc.setRequestProperty("Access-Control-Allow-Origin", "*");
+        uc.setRequestProperty("Access-Control-Allow-Credentials", "true");
+        uc.setRequestProperty("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE");
+        uc.setRequestProperty("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+        uc.setRequestProperty("Access-Control-Expose-Headers", "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
         System.out.println("------------------------------------------------------------------");
+
         Map<String, java.util.List<String>> requestHeaders = uc.getRequestProperties();
         for (Map.Entry<String, java.util.List<String>> entry : requestHeaders.entrySet()) {
             String headerName = entry.getKey();
