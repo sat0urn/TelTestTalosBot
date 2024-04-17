@@ -71,6 +71,7 @@ public class AnimeService {
         uc.setRequestProperty("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE");
         uc.setRequestProperty("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
         uc.setRequestProperty("Access-Control-Expose-Headers", "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+        uc.setRequestProperty("Authorization", "Bearer vXWcNmhQb0NLvNCus8VWUeukSzWmCOLn");
 
         System.out.println("------------------------------------------------------------------");
 
