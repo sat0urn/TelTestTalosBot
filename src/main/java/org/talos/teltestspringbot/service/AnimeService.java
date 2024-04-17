@@ -61,12 +61,21 @@ public class AnimeService {
         URL url = new URL(url_str);
 
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-        System.out.println("1");
-        uc.addRequestProperty("User-Agent", "Mozilla/4.0");
+        System.out.println("------------------------------------------------------------------");
+        uc.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+        uc.setRequestProperty("X-Requested-With", "XMLHttpRequest");
         uc.setRequestProperty("Accept", "*/*");
-        uc.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+        uc.setRequestProperty("Connection", "keep-alive");
 
-
+        System.out.println("------------------------------------------------------------------");
+        Map<String, java.util.List<String>> requestHeaders = uc.getRequestProperties();
+        for (Map.Entry<String, java.util.List<String>> entry : requestHeaders.entrySet()) {
+            String headerName = entry.getKey();
+            for (String value : entry.getValue()) {
+                System.out.println(headerName + ": " + value);
+            }
+        }
+        System.out.println("------------------------------------------------------------------");
         // Get the response code
         int responseCode = uc.getResponseCode();
         System.out.println("Response Code: " + responseCode);
@@ -79,7 +88,8 @@ public class AnimeService {
                 System.out.println(headerName + ": " + value);
             }
         }
-        System.out.println("2");
+
+        System.out.println("------------------------------------------------------------------");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(), StandardCharsets.UTF_8));
 
@@ -88,6 +98,8 @@ public class AnimeService {
         while ((inputLine = in.readLine()) != null) {
             result.append(inputLine);
         }
+
+        System.out.println(result);
 
         in.close();
         uc.disconnect();
